@@ -2,10 +2,28 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-# Set page configuration and theme
-st.set_page_config(layout="wide", page_title="GPU TCO Calculator", page_icon="💰")
+# Set page configuration with CORS headers
+st.set_page_config(
+    layout="wide", 
+    page_title="GPU TCO Calculator", 
+    page_icon="💰",
+    menu_items={
+        'Get Help': None,
+        'Report a bug': None,
+        'About': None
+    }
+)
 
-st.title("💰 GPU TCO Calculator")
+# Add these lines at the start of your app
+headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET,HEAD,POST,OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Credentials': 'true'
+}
+
+for key, value in headers.items():
+    st.markdown(f"<style>header {{'{key}': '{value}';}}</style>", unsafe_allow_html=True)
 
 # Load example GPU data
 @st.cache_data
